@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* ============================================
+   SeeMe — Design System (Tailwind v4)
+   Dark-first, neon magenta/violet accent
+   ============================================ */
+
+@theme {
+  /* Brand palette */
+  --color-bg: #07070d;
+  --color-surface: #101018;
+  --color-elevated: #171725;
+  --color-overlay: #1e1e30;
+  --color-line: #262638;
+
+  --color-accent: #ff2d7a;
+  --color-accent-2: #b026ff;
+  --color-accent-3: #7c3aed;
+  --color-accent-soft: rgba(255, 45, 122, 0.12);
+
+  --color-success: #2dd4a7;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+
+  --color-text: #f4f4f8;
+  --color-muted: #a0a0b2;
+  --color-subtle: #6b6b80;
+
+  /* Fonts */
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii */
+  --radius-btn: 0.625rem;
+  --radius-card: 1rem;
+  --radius-hero: 1.5rem;
+
+  /* Shadows / glows */
+  --shadow-glow: 0 0 40px rgba(255, 45, 122, 0.35);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.45);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  --animate-scale-in: scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+  --animate-pulse-dot: pulse-dot 1.2s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shimmer {
+    from { background-position: -400px 0; }
+    to { background-position: 400px 0; }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.8); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-16px) rotate(1.5deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* ---------- Base ---------- */
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #3a3a52; }
+
+/* Thin scrollbar for chat panels */
+.scroll-thin::-webkit-scrollbar { width: 5px; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- Reusable utilities ---------- */
+
+.text-gradient {
+  background: linear-gradient(92deg, #ff2d7a 0%, #b026ff 55%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-gradient {
+  background: linear-gradient(93deg, #ff2d7a, #b026ff);
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-gradient:hover {
+  filter: brightness(1.12);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+.btn-gradient:active { transform: translateY(0) scale(0.98); }
+
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(255, 45, 122, 0.35);
+}
+
+.glass {
+  background: rgba(16, 16, 24, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-elevated) 50%, var(--color-surface) 75%);
+  background-size: 800px 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Ambient hero blobs */
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Chat typing indicator */
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--color-muted);
+  animation: var(--animate-pulse-dot);
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+/* Staggered grid entrance (used via inline style delays) */
+.stagger { animation: var(--animate-fade-up); }
