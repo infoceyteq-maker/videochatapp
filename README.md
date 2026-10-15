@@ -4,6 +4,9 @@ A full-featured **joi.com-style** AI companion platform built with **Next.js 16 
 
 > ⚠️ 18+ concept demo. All characters are fictional and AI-generated. Interactions are simulated — no real backend is connected yet.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Finfoceyteq-maker%2Fvideochatapp&project-name=seeme&repository-name=seeme)
+
+
 ## ✨ Features
 
 | Area | What's included |
